@@ -1,0 +1,8 @@
+.main-border {
+    background-color: #9ECAFF;
+    max-width: 95%;
+    margin: auto;
+    padding: auto;
+    min-height: 100vh
+    /* border: solid 10px white; */
+}

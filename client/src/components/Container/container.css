@@ -1,0 +1,15 @@
+.container{
+    background-color: white;
+    border: solid 2px #295080;
+}
+
+.header{
+    background-color: #295080;
+    color: white;
+    text-align: center;
+}
+
+.data{
+    background-color: white;
+    text-align: center;
+}
