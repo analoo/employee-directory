@@ -10,29 +10,19 @@ function Directory() {
     const [employees, setEmployees] = useState([]);
     const [filteredEE, setFilteredEE] = useState([]);
     const [isFilter, setIsFilter] = useState(false)
-    const [sorted, setSorted] = useState(0)
+    const [sorted, setSorted] = useState("asc")
 
 
-    function loadEmployees(ordering) {
+    function loadEmployees() {
         API.loadUsers().then(res => {
-            if (ordering % 2 === 0) {
-                let desc = res.data.sort((a, b) =>
-                    a.name.localeCompare(b.name))
-                setSorted(sorted+1)
-                setEmployees(desc)
-            }
-            else {
-                let asc = res.data.sort((a, b) =>
-                    b.name.localeCompare(a.name))
-                setEmployees(asc)
-                setSorted(sorted+1)
-            }
+            setEmployees(res.data)
         })
     }
 
 
     useEffect(() => {
-        loadEmployees(sorted);
+        loadEmployees();
+        console.log("use Effects")
     }, [])
 
     function filterEmployees(search) {
@@ -44,30 +34,34 @@ function Directory() {
         }))
     }
 
-    // function sortEmployees(ordering,data) {
-    //     if (ordering % 2 === 0) {
-    //         let desc = data.sort((a, b) =>
-    //             a.name.localeCompare(b.name))
-    //         setSorted(sorted+1)
-    //         console.log(desc)
-    //     }
-    //     else {
-    //         let asc = data.sort((a, b) =>
-    //             b.name.localeCompare(a.name))
-    //         setEmployees(asc)
-    //         setSorted(sorted+1)
-    //     }
+    function sortEmployees(ordering) {
+        if (ordering === "desc") {
+            let desc = employees.sort((b, a) =>
+                a.name.localeCompare(b.name))
+            let descF = filteredEE.sort((b, a) =>
+                a.name.localeCompare(b.name))
+            setEmployees(desc)
+            setFilteredEE(descF)
+            setSorted("asc")
+        }
+        else if (ordering === "asc") {
+            let asc = employees.sort((b, a) =>
+                b.name.localeCompare(a.name))
+            let ascF = filteredEE.sort((b, a) =>
+                a.name.localeCompare(b.name))
+            setEmployees(asc)
+            setFilteredEE(ascF)
+            setSorted("desc")
+        }
+    }
 
-
-
-
-    // }
+    console.log(sorted)
 
     return (
 
 
         <div>
-            <Jumbotron name="Company XZYLMP" headline="making companies great" />
+            <Jumbotron name="Medrano Industries" headline="Where homework is always done." />
             <div className="input-group mb-3">
                 <input type="search" className="form-control search col-md-9" placeholder="Search for Employee"
                     name="search"
@@ -75,8 +69,8 @@ function Directory() {
                 />
             </div>
             {isFilter
-                ? <Container employees={filteredEE} sort={() => loadEmployees(sorted)} />
-                : <Container employees={employees} sort={() => loadEmployees(sorted)} />
+                ? <Container employees={filteredEE} sort={() => sortEmployees(sorted)} />
+                : <Container employees={employees} sort={() => sortEmployees(sorted)} />
             }
         </div>
 

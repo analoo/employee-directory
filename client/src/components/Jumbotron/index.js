@@ -5,7 +5,7 @@ function Jumbotron(props) {
     return (
         <div className="jumbotron jumbotron-fluid">
             <div>
-            <h1 className="display-4">{props.name}</h1>
+            <h1 className="display-4">{props.name}&trade;</h1>
             <p className="lead">{props.headline}</p>
             </div>
         </div>)

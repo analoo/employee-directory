@@ -14,7 +14,7 @@ function Container(props) {
                     Image
                 </div>
                 <div className="col-md-3">
-                    Name <span id="sort"><a onClick={props.sort} href="">^</a></span>
+                    Name <span id="sort"><a onClick={props.sort}>^</a></span>
                 </div>
                 <div className="col-md-2">
                     Phone
