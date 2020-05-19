@@ -19,7 +19,6 @@ module.exports = function (app) {
                 dob: person.dob.date
             }
 
-            console.log(employee)
             db.Employee.create(employee).then(res => console.log(res))
         })
             .catch(err => {
@@ -29,11 +28,8 @@ module.exports = function (app) {
     });
 
     app.get("/api/employees", (req, res) => {
-        console.log("You called API Employees")
-
         db.Employee.find()
             .then(results => {
-                console.log(results)
                 res.send(results)
             })
             .catch(err => {

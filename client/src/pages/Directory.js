@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Jumbotron from "../components/Jumbotron/index"
 import Container from "../components/Container/index"
+import "./directory.css"
 import API from "../utils/API"
 
 
@@ -12,14 +13,26 @@ function Directory() {
     const [sorted, setSorted] = useState(0)
 
 
-    function loadEmployees() {
+    function loadEmployees(ordering) {
         API.loadUsers().then(res => {
-            setEmployees(res.data)
+            if (ordering % 2 === 0) {
+                let desc = res.data.sort((a, b) =>
+                    a.name.localeCompare(b.name))
+                setSorted(sorted+1)
+                setEmployees(desc)
+            }
+            else {
+                let asc = res.data.sort((a, b) =>
+                    b.name.localeCompare(a.name))
+                setEmployees(asc)
+                setSorted(sorted+1)
+            }
         })
     }
 
+
     useEffect(() => {
-        loadEmployees();
+        loadEmployees(sorted);
     }, [])
 
     function filterEmployees(search) {
@@ -31,25 +44,24 @@ function Directory() {
         }))
     }
 
-    function sortEmployees(ordering) {
-        if (ordering % 2 == 0) {
-            let desc = employees.sort((a, b) =>
-                a.name.localeCompare(b.name))
-            setEmployees(desc)
-            setSorted(sorted+1)
-            console.log(employees)
-        }
-        else {
-            let asc = employees.sort((a, b) =>
-                b.name.localeCompare(a.name))
-            setEmployees(asc)
-            setSorted(sorted+1)
-        }
+    // function sortEmployees(ordering,data) {
+    //     if (ordering % 2 === 0) {
+    //         let desc = data.sort((a, b) =>
+    //             a.name.localeCompare(b.name))
+    //         setSorted(sorted+1)
+    //         console.log(desc)
+    //     }
+    //     else {
+    //         let asc = data.sort((a, b) =>
+    //             b.name.localeCompare(a.name))
+    //         setEmployees(asc)
+    //         setSorted(sorted+1)
+    //     }
 
 
 
 
-    }
+    // }
 
     return (
 
@@ -57,14 +69,14 @@ function Directory() {
         <div>
             <Jumbotron name="Company XZYLMP" headline="making companies great" />
             <div className="input-group mb-3">
-                <input type="search" className="form-control col-md-9" placeholder="Search for Employee"
+                <input type="search" className="form-control search col-md-9" placeholder="Search for Employee"
                     name="search"
                     onChange={e => filterEmployees(e.target.value)}
                 />
             </div>
             {isFilter
-                ? <Container employees={filteredEE} sort={() => sortEmployees(sorted)} />
-                : <Container employees={employees} sort={() => sortEmployees(sorted)} />
+                ? <Container employees={filteredEE} sort={() => loadEmployees(sorted)} />
+                : <Container employees={employees} sort={() => loadEmployees(sorted)} />
             }
         </div>
 
