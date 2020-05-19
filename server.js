@@ -12,10 +12,10 @@ app.use(express.json());
 app.use(express.static("public"));
 
 if (process.env.Node_ENV === "production") {
-  app.use("*", (req, res) => {
-    // app.use(express.static("client/build"))
-    res.sendFile(path.join(__dirname, "../client/public/index.html"));
-  });
+//  app.use("*", (req, res) => {
+     app.use(express.static("client/build"))
+//    res.sendFile(path.join(__dirname, "../client/public/index.html"));
+//  });
 }
 
 
