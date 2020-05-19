@@ -7,7 +7,7 @@ export default {
 
     createUsers: function(){
       console.log("API request")
-      return axios.post("api/employees/new", {})
+      return axios.get("/api/employees/new")
     }
 
 };

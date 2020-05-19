@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 
 const EmployeeSchema = new Schema({
     name: String,
-    jobTitle: String,
-    picture: String,
-    manager: String,
-    directReports: [{
-        employee_id: String
-    }],
-    location: String,
+    // jobTitle: String,
+    image: String,
+    // manager: String,
+    // directReports: [{
+    //     employee_id: String
+    // }],
+    // location: String,
     phone: String,
     email: String,
     dob: String

@@ -1,10 +1,10 @@
 const express = require("express");
-const mongoose = require("mongoose")
+// const mongoose = require("mongoose")
 const path = require("path");
 // const routes = require("/routes")
 
 const app = express();
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 3007;
 
 
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +22,7 @@ require("./routes/api-routes")(app);
 require("./routes/html-routes")(app)
 
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mongoEmployeeDirectory", { useNewUrlParser: true });
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mongoEmployeeDirectory", { useNewUrlParser: true });
 
 
 app.listen(PORT, () => {
