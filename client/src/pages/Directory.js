@@ -7,53 +7,65 @@ import API from "../utils/API"
 function Directory() {
 
     const [employees, setEmployees] = useState([]);
+    const [filteredEE, setFilteredEE] = useState([]);
+    const [isFilter, setIsFilter] = useState(false)
+    const [sorted, setSorted] = useState(0)
 
 
     function loadEmployees() {
         API.loadUsers().then(res => {
-            console.log(res.data)
             setEmployees(res.data)
         })
     }
-
 
     useEffect(() => {
         loadEmployees();
     }, [])
 
-    // function sortEmployees() {
-
-    // }
-
-    function makeASearch(search) {
-        console.log(search)
-        API.findEmployees(search)
-        .then(res => {
-            console.log(`employees is set at: ${res}`)
-        })
-
+    function filterEmployees(search) {
+        setIsFilter(true);
+        search.toLowerCase()
+        setFilteredEE(employees.filter(ee => {
+            let name = ee.name.toLowerCase();
+            return name.indexOf(search) >= 0
+        }))
     }
 
-    // function addEmployee(){
-    //         API.createUsers().then(res => console.log(res))
+    function sortEmployees(ordering) {
+        if (ordering % 2 == 0) {
+            let desc = employees.sort((a, b) =>
+                a.name.localeCompare(b.name))
+            setEmployees(desc)
+            setSorted(sorted+1)
+            console.log(employees)
+        }
+        else {
+            let asc = employees.sort((a, b) =>
+                b.name.localeCompare(a.name))
+            setEmployees(asc)
+            setSorted(sorted+1)
+        }
 
-    // }
 
-    // addEmployee()
+
+
+    }
 
     return (
 
 
         <div>
-            <Jumbotron name="Company X" headline="making companies great" />
+            <Jumbotron name="Company XZYLMP" headline="making companies great" />
             <div className="input-group mb-3">
-                <input type="search" className="form-control col-md-9" placeholder="Search for Employee" 
-                // value = {search}
-                name="search"
-                onChange={e => makeASearch(e.target.value)}
+                <input type="search" className="form-control col-md-9" placeholder="Search for Employee"
+                    name="search"
+                    onChange={e => filterEmployees(e.target.value)}
                 />
             </div>
-            <Container employees={employees} />
+            {isFilter
+                ? <Container employees={filteredEE} sort={() => sortEmployees(sorted)} />
+                : <Container employees={employees} sort={() => sortEmployees(sorted)} />
+            }
         </div>
 
     )

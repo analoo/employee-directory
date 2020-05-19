@@ -11,7 +11,6 @@ function App() {
     <Router>
       <MainNav>
         <Route exact path="/" component={Directory} />
-
       </MainNav>
     </Router>
   );
