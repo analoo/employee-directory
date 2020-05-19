@@ -5,13 +5,7 @@ import Row from "../Container/Row"
 
 
 function Container(props) {
-    let person = {
-        name: "Sar",
-        phone: "1234567890",
-        email: "email@email.com",
-        dob: "10/10/1990"
-
-    }
+   
 
 
     return (
@@ -33,8 +27,10 @@ function Container(props) {
                     DOB
                 </div>
             </div>
-            <Row person = {person}/>
             
+            {props.employees.map(element => (
+                <Row person={element} key={element._id}/> ))}
+
         </div>)
 };
 

@@ -1,6 +1,7 @@
 .container{
     background-color: white;
     border: solid 2px #295080;
+    vertical-align: middle;
 }
 
 .header{
@@ -12,4 +13,18 @@
 .data{
     background-color: white;
     text-align: center;
+    vertical-align: middle;
+}
+img{
+    border-radius: 100px;
+    padding: 1px;
+    margin: 0;
+}
+.image{  
+    width: 20px;
+}
+
+.col-md{
+    vertical-align: middle;
+    padding: 2px;
 }

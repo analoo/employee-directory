@@ -1,21 +1,25 @@
 import React from "react";
+import "./container.css"
 
 
 function Row(props) {
+    let element = props.person
     return (
         <div className="row data">
+            <div className="col-md image">
+            <img src={element.image} alt={element.name}/>
+                </div>
             <div className="col-md">
-                {props.person.image}</div>
+                {element.name}</div>
             <div className="col-md">
-                {props.person.name}</div>
+                {element.phone}</div>
             <div className="col-md">
-                {props.person.phone}</div>
+                {element.email}</div>
             <div className="col-md">
-                {props.person.email}</div>
-            <div className="col-md">
-                {props.person.dob}</div>
+                {element.dob}</div>
         </div>
     )
+
 }
 
 export default Row;

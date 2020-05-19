@@ -20,7 +20,7 @@ module.exports = function (app) {
             }
 
             console.log(employee)
-            db.Employee.create({employee}).then(res => console.log(res))
+            db.Employee.create(employee).then(res => console.log(res))
         })
             .catch(err => {
                 console.log(err)
@@ -28,14 +28,22 @@ module.exports = function (app) {
 
     });
 
-    app.get("api/employees", (req, res) => {
-        db.Employee.findAll({})
-            .then(res => {
-                console.log(res);
-                res.json(res)
+    app.get("/api/employees", (req, res) => {
+        console.log("You called API Employees")
+
+        db.Employee.find()
+            .then(results => {
+                console.log(results)
+                res.send(results)
             })
             .catch(err => {
                 console.log(err)
             })
+    })
+
+    app.get("/api/employees/find", (req,res) => {
+        db.Employee.find({
+            name: req.body
+        })
     })
 }
