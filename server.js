@@ -13,7 +13,7 @@ app.use(express.static("public"));
 
 if (process.env.Node_ENV === "production") {
   app.use("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/index.html"));
+    res.sendFile(path.join(__dirname, "./client/public/index.html"));
   });
 }
 
